@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menús Digitales con QR | TuRestauranteDigital</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --light-text: #fff;
+            --section-bg: #f8f9fa;
+            --card-bg: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            font-size: 16px;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--secondary-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 16px;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary-color);
+        }
+        
+        /* Back Button */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            margin-right: 15px;
+        }
+        
+        .back-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .back-btn i {
+            margin-right: 5px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.85), rgba(44, 62, 80, 0.85)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--light-text);
+            text-align: center;
+            padding: 100px 0;
+        }
+        
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            font-size: 18px;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 70px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 32px;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .section-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .section-text {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 30px;
+        }
+        
+        .section-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        
+        .section-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Benefits Section */
+        .benefits {
+            background-color: var(--section-bg);
+        }
+        
+        .benefit-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        
+        .benefit-card {
+            flex-basis: calc(50% - 20px);
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .benefit-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .benefit-card h3 i {
+            margin-right: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .benefit-card ul {
+            list-style-type: none;
+        }
+        
+        .benefit-card ul li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .benefit-card ul li:before {
+            content: "\f00c";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+        }
+        
+        /* How it Works Section */
+        .steps {
+            counter-reset: step-counter;
+        }
+        
+        .step {
+            display: flex;
+            margin-bottom: 40px;
+            align-items: center;
+        }
+        
+        .step-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin-right: 25px;
+            min-width: 60px;
+            text-align: center;
+            opacity: 0.8;
+        }
+        
+        .step-content {
+            flex: 1;
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .step-content h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: var(--primary-color);
+        }
+        
+        /* FAQ Section */
+        .faq {
+            background-color: var(--section-bg);
+        }
+        
+        .faq-items {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            margin-bottom: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            background-color: var(--card-bg);
+        }
+        
+        .faq-question {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 18px 20px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s;
+        }
+        
+        .faq-answer {
+            background-color: var(--card-bg);
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 20px;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        /* Contact Section */
+        .contact {
+            text-align: center;
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 70px 0;
+        }
+        
+        .contact h2 {
+            color: var(--light-text);
+            margin-bottom: 20px;
+        }
+        
+        .contact p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 18px;
+        }
+        
+        .contact .btn {
+            background-color: var(--accent-color);
+        }
+        
+        .contact .btn:hover {
+            background-color: #c0392b;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: var(--light-text);
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        footer p {
+            margin-bottom: 10px;
+        }
+        
+        footer a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .section-content {
+                flex-direction: column;
+            }
+            
+            .section-text {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+            
+            .benefit-card {
+                flex-basis: 100%;
+            }
+            
+            .step {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step-number {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            nav ul {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-utensils"></i>
+                TuRestauranteDigital
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#beneficios">Beneficios</a></li>
+                    <li><a href="#como-funciona">Cómo Funciona</a></li>
+                    <li><a href="#preguntas">Preguntas</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="container">
+            <a href="https://menudigitalnegocio.github.io/Pagina-principal/" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Volver
+            </a>
+            <h1>Menús Digitales con QR</h1>
+            <p>La solución moderna para restaurantes y cafeterías que transforma la experiencia de tus clientes y optimiza la gestión de tu establecimiento.</p>
+            <a href="#contacto" class="btn">Solicitar Información</a>
+        </div>
+    </section>
+
+    <!-- What is it Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">¿Qué es un Menú Digital con QR?</h2>
+            <div class="section-content">
+                <div class="section-text">
+                    <p>Es una solución innovadora que permite a tus clientes acceder a tu carta o menú simplemente escaneando un código QR con su smartphone. Sin necesidad de aplicaciones adicionales, tu menú se mostrará de forma interactiva y actualizada en sus dispositivos.</p>
+                </div>
+                <div class="section-image">
+                    <img src="https://images.unsplash.com/photo-1584362917165-526a968579e8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Menú digital con código QR">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits" id="beneficios">
+        <div class="container">
+            <h2 class="section-title">Beneficios para tus Clientes</h2>
+            <div class="benefit-cards">
+                <div class="benefit-card">
+                    <h3><i class="fas fa-smile"></i> Comodidad y Accesibilidad</h3>
+                    <ul>
+                        <li>Acceso instantáneo: Tus clientes pueden ver tu menú en segundos, sin esperar a que un mesero se lo proporcione.</li>
+                        <li>Disponible 24/7: Tu menú es accesible en cualquier momento, incluso fuera del horario de atención.</li>
+                        <li>Multiplataforma: Compatible con cualquier dispositivo móvil, independientemente del sistema operativo.</li>
+                    </ul>
+                </div>
+                <div class="benefit-card">
+                    <h3><i class="fas fa-star"></i> Mejora de la Experiencia del Cliente</h3>
+                    <ul>
+                        <li>Menús multilingües: Ofrece tu menú en varios idiomas para atender a clientes internacionales.</li>
+                        <li>Menús interactivos: Incluye fotografías de alta calidad, descripciones detalladas e incluso videos de tus platos.</li>
+                        <li>Información nutricional: Permite a tus clientes conocer detalles sobre alérgenos, calorías e ingredientes.</li>
+                        <li>Seguridad e higiene: Reduce el contacto con menús físicos, una preocupación importante en la actualidad.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h2 class="section-title">Beneficios para tu Restaurante</h2>
+            <div class="benefit-cards">
+                <div class="benefit-card">
+                    <h3><i class="fas fa-cogs"></i> Eficiencia Operativa</h3>
+                    <ul>
+                        <li>Reducción de costos: Elimina los gastos impresos en menús físicos y sus constantes reimpresiones por cambios.</li>
+                        <li>Actualizaciones en tiempo real: Modifica precios, añade o elimina platos al instante, sin necesidad de reimprimir.</li>
+                        <li>Sostenibilidad: Contribuye al cuidado del medio ambiente al reducir el consumo de papel.</li>
+                    </ul>
+                </div>
+                <div class="benefit-card">
+                    <h3><i class="fas fa-chart-line"></i> Estrategias de Marketing</h3>
+                    <ul>
+                        <li>Recopilación de datos: Obtén información valiosa sobre las preferencias de tus clientes y los platos más consultados.</li>
+                        <li>Promociones con QR: Crea campañas especiales ofreciendo descuentos o platos exclusivos a quienes escaneen el código.</li>
+                        <li>Integración con redes sociales: Facilita que tus clientes compartan su experiencia y tus platos en sus perfiles sociales.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works Section -->
+    <section class="steps" id="como-funciona">
+        <div class="container">
+            <h2 class="section-title">¿Cómo Funciona?</h2>
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Generamos tu menú digital</h3>
+                    <p>Creamos una versión atractiva y funcional de tu carta actual, con fotografías de alta calidad y descripciones detalladas de tus platos.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Creamos tu código QR único</h3>
+                    <p>Diseñamos un código específico para tu establecimiento que enlaza directamente a tu menú digital. Este código será único y personalizado para tu negocio.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Implementación</h3>
+                    <p>Te proporcionamos el material necesario, incluyendo de 20 a 30 códigos QR impresos en papel fotográfico de aproximadamente 4x4 cm y aproximadamente seis códigos QR de tamaño medio de 7x7 cm para colocar en diferentes áreas de tu restaurante.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Actualizaciones constantes</h3>
+                    <p>Modificamos tu menú tantas veces como sea necesario sin costos adicionales. Cambia precios, añade nuevos platos o elimina los que ya no offers de forma inmediata.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="preguntas">
+        <div class="container">
+            <h2 class="section-title">Preguntas Frecuentes</h2>
+            <div class="faq-items">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>¿Mis clientes necesitan una aplicación especial?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No, solo necesitan la cámara de su smartphone o cualquier lector de QR estándar. La mayoría de los teléfonos modernos pueden leer códigos QR directamente desde la aplicación de la cámara sin necesidad de descargar programas adicionales.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>¿Qué pasa si no tengo conexión a internet en mi local?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>El código QR puede dirigir a una versión estática del menú que se carga una vez y permanece accesible incluso sin conexión a internet. Esto garantiza que tus clientes siempre puedan ver tu menú, independientemente de la calidad de la conexión en tu establecimiento.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>¿Puedo cambiar mi menú con frecuencia?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sí, puedes actualizar tu menú digital tantas veces como lo necesites, de forma inmediata y sin costos adicionales. Esto es especialmente útil para restaurantes que ofrecen menús del día, promociones especiales o cambios estacionales en su carta.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>¿Es seguro para mis clientes?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sí, nuestro sistema cumple con todos los estándares de seguridad y privacidad de datos. No recopilamos información personal de tus clientes a menos que ellos decidan proporcionarla voluntariamente a través de formularios en tu menú digital.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contacto">
+        <div class="container">
+            <h2 class="section-title">Contáctanos</h2>
+            <p>¿Listo para modernizar tu restaurante o cafetería con un menú digital QR? Contáctanos hoy mismo y te ayudaremos a implementar esta solución que revolucionará la experiencia de tus clientes y optimizará tu operación.</p>
+            <a href="mailto:info@turestaurantedigital.com" class="btn">Solicitar más información</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 TuRestauranteDigital. Todos los derechos reservados.</p>
+            <p><a href="politica-privacidad.html">Política de Privacidad</a> | <a href="terminos-condiciones.html">Términos y Condiciones</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Close all other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current item
+                    item.classList.toggle('active');
+                });
+            });
+            
+            // Smooth scrolling for navigation links
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -758,6 +758,30 @@
             color: var(--color-secondary);
         }
         
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+        
+        .contact-item i {
+            margin-right: 8px;
+            color: var(--color-secondary);
+        }
+        
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+        }
+        
         .whatsapp-link {
             display: inline-flex;
             align-items: center;
@@ -930,6 +954,11 @@
             .footer-links a {
                 margin: 0.5rem 0;
             }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
         }
         
         @media (max-width: 576px) {
@@ -960,7 +989,7 @@
     <div class="overlay" id="overlay"></div>
     
     <!-- Botón flotante de WhatsApp -->
-    <a href="https://wa.me/543834619831" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/543834311755" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
     <!-- Header -->
@@ -978,7 +1007,7 @@
                     <li><a href="#how-it-works" class="nav-link">Cómo Funciona</a></li>
                     <li><a href="#testimonials" class="nav-link">Testimonios</a></li>
                     <li><a href="#contact" class="nav-link">Contacto</a></li>
-                    <li><a href="https://wa.me/543834619831" target="_blank" class="btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+                    <li><a href="https://wa.me/543834311755" target="_blank" class="btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
                 </ul>
                 <div class="menu-toggle" id="menuToggle">
                     <i class="fas fa-bars"></i>
@@ -1194,8 +1223,20 @@
                     <a href="#testimonials" class="nav-link">Testimonios</a>
                     <a href="#contact" class="nav-link">Contacto</a>
                 </div>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:menudigitalnegocio@gmail.com">menudigitalnegocio@gmail.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <a href="https://wa.me/543834311755" target="_blank">3834311755</a>
+                    </div>
+                </div>
+                
                 <p>Digitalizamos tu menú para que siempre esté actualizado</p>
-                <a href="https://wa.me/543834619831" class="whatsapp-link" target="_blank">
+                <a href="https://wa.me/543834311755" class="whatsapp-link" target="_blank">
                     <i class="fab fa-whatsapp"></i> Escribinos por WhatsApp
                 </a>
                 <div class="copyright">
@@ -1373,7 +1414,7 @@
             
             // Configurar botón del modal
             document.getElementById('modalBtn').onclick = function() {
-                window.open(`https://wa.me/543834619831?text=${message}`, '_blank');
+                window.open(`https://wa.me/543834311755?text=${message}`, '_blank');
                 modal.style.display = 'none';
             };
             
@@ -1392,7 +1433,7 @@
             // Redirigir automáticamente después de 3 segundos
             setTimeout(() => {
                 if (modal.style.display === 'block') {
-                    window.open(`https://wa.me/543834619831?text=${message}`, '_blank');
+                    window.open(`https://wa.me/543834311755?text=${message}`, '_blank');
                     modal.style.display = 'none';
                 }
             }, 3000);

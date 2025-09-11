@@ -200,6 +200,37 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
+        /* Image Carousel */
+        .carousel-container {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .carousel-slide {
+            display: none;
+            width: 100%;
+            animation: fade 1.5s ease-in-out;
+        }
+        
+        .carousel-slide.active {
+            display: block;
+        }
+        
+        .carousel-slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        @keyframes fade {
+            from {opacity: 0.4}
+            to {opacity: 1}
+        }
+        
         /* Benefits Section */
         .benefits {
             background-color: var(--section-bg);
@@ -559,7 +590,24 @@
                     <p>Es una solución innovadora que permite a tus clientes acceder a tu carta o menú simplemente escaneando un código QR con su smartphone. Sin necesidad de aplicaciones adicionales, tu menú se mostrará de forma interactiva y actualizada en sus dispositivos.</p>
                 </div>
                 <div class="section-image">
-                    <img src="https://images.unsplash.com/photo-1584362917165-526a968579e8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Menú digital con código QR">
+                    <!-- Carrusel de imágenes de restaurantes y platos gourmet -->
+                    <div class="carousel-container">
+                        <div class="carousel-slide active">
+                            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Restaurante elegante con iluminación cálida">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" alt="Plato gourmet elegante en el plato">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Chef preparando plato gourmet">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Mesa elegante en restaurante gourmet">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Plato gourmet con presentación elegante">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -754,8 +802,28 @@
     </footer>
 
     <script>
-        // FAQ Accordion
+        // Carrusel de imágenes
         document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.carousel-slide');
+            let currentSlide = 0;
+            
+            function showSlide(index) {
+                slides.forEach(slide => {
+                    slide.classList.remove('active');
+                });
+                
+                slides[index].classList.add('active');
+            }
+            
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }
+            
+            // Cambiar imagen cada 3 segundos
+            setInterval(nextSlide, 3000);
+            
+            // FAQ Accordion
             const faqItems = document.querySelectorAll('.faq-item');
             
             faqItems.forEach(item => {
